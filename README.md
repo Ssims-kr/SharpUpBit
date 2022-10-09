@@ -24,3 +24,4 @@ namespace Test {
 
 # Library
 * [System.IdentityModel.Tokens.Jwt](https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet)
+* [Newtonsoft.Json](https://www.newtonsoft.com/json)
