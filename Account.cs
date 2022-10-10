@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -16,31 +17,37 @@ namespace SharpUpBit
             /// <summary>
             /// 화폐를 의미하는 영문 대문자 코드
             /// </summary>
+            [JsonProperty(PropertyName="currency")]
             public string Currency { get; set; }
 
             /// <summary>
             /// 주문 가능한 금액/수량
             /// </summary>
+            [JsonProperty(PropertyName="balance")]
             public double Balance { get; set; }
 
             /// <summary>
             /// 주문 중 묶여있는 금액/수량
             /// </summary>
+            [JsonProperty(PropertyName="locked")]
             public double Locked { get; set; }
 
             /// <summary>
             /// 매수 평균가
             /// </summary>
+            [JsonProperty(PropertyName="avg_buy_price")]
             public double AvgBuyPrice { get; set; }
 
             /// <summary>
             /// 매수 평균가 수정 여부
             /// </summary>
+            [JsonProperty(PropertyName="avg_buy_price_modified")]
             public bool AvgBuyPriceModified { get; set; }
 
             /// <summary>
             /// 평단가 기준 화폐
             /// </summary>
+            [JsonProperty(PropertyName="unit_currency")]
             public string UnitCurrency { get; set; }
             #endregion
         }
@@ -72,14 +79,15 @@ namespace SharpUpBit
                 JArray jArr = JArray.Parse(body);
 
                 for (int i = 0; i < jArr.Count; i++) {
-                    lst.Add(new Account { 
-                        Currency = jArr[i]["currency"].ToString(),
-                        Balance = double.Parse(jArr[i]["balance"].ToString()),
-                        Locked = double.Parse(jArr[i]["locked"].ToString()),
-                        AvgBuyPrice = double.Parse(jArr[i]["avg_buy_price"].ToString()),
-                        AvgBuyPriceModified = bool.Parse(jArr[i]["avg_buy_price_modified"].ToString()),
-                        UnitCurrency = jArr[i]["unit_currency"].ToString(),
-                    });
+                    //lst.Add(new Account { 
+                    //    Currency = jArr[i]["currency"].ToString(),
+                    //    Balance = double.Parse(jArr[i]["balance"].ToString()),
+                    //    Locked = double.Parse(jArr[i]["locked"].ToString()),
+                    //    AvgBuyPrice = double.Parse(jArr[i]["avg_buy_price"].ToString()),
+                    //    AvgBuyPriceModified = bool.Parse(jArr[i]["avg_buy_price_modified"].ToString()),
+                    //    UnitCurrency = jArr[i]["unit_currency"].ToString(),
+                    //});
+                    lst.Add(JsonConvert.DeserializeObject<Account>(jArr[i].ToString()));
                 }
             }
 
