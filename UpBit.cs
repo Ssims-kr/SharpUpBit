@@ -11,7 +11,7 @@ namespace SharpUpBit
     /// <summary>
     /// UpBit API 관리 클래스
     /// </summary>
-    public class UpBit
+    public partial class UpBit
     {
         #region 구조체
         /// <summary>
